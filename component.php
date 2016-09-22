@@ -44,7 +44,7 @@ class CPutParamWS extends IWebService
 
         $wsdesc->classes = array
         (
-            "CWebServiceDesc"=> array
+            "CPutParamWS"=> array
             (
                 "putFile" => array
                 (
