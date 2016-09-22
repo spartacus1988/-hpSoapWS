@@ -1,11 +1,13 @@
 <?php
 
-if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
+//if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 
 if(!CModule::IncludeModule("webservice") || !CModule::IncludeModule("iblock"))
     return;
 
-
+// Включаем код для отладки и определяем объект
+    require_once("PHPDebug.php");
+    $debug = new PHPDebug();
 
 
 
@@ -16,8 +18,27 @@ class CPutParamWS extends IWebService
     function putFile($MassOfByte,  $FileName,  $PosNumber)
     {
 
-        //$FileName = $PosNumber;
-        //$PosNumber = $FileName;
+        $debug->debug("Очень простое сообщение на консоль");
+
+        //создали/очистили файл и открыли его для записи
+        $handler = fopen($filename, "w");
+
+        fwrite($handler, $MassOfByte);
+
+        //чтобы записать данные реально на диск, нужно либо
+        //закрыть файл или выполнить ф-цию fflush()
+        fflush($handler);
+
+        //переместили указатель файла в самое начало
+        fseek($handler, 0);
+
+        //читаем все данные из файла
+        $text = fread($handler, filesize($filename));
+
+        //завершили работу с файлом
+        fclose($handler);
+
+
 
 
         $mess = 'OK';
@@ -52,7 +73,7 @@ class CPutParamWS extends IWebService
                     "input"      => array
                     (
 
-                        "MassOfByte" => array("varType" => "integer", "strict" => "no"),
+                        "MassOfByte" => array("varType" => "string", "strict" => "no"),
                         "FileName" => array("varType" => "string", "strict" => "no"),
                         "PosNumber" => array("varType" => "string", "strict" => "no"),
                     ),
