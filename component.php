@@ -10,12 +10,18 @@ if(!CModule::IncludeModule("webservice") || !CModule::IncludeModule("iblock"))
 
 
 // наш новый класс наследуетсЯ от базового IWebService
-class CAddNewsWS extends IWebService
+class CPutParamWS extends IWebService
 {
 
     function putFile($MassOfByte,  $FileName,  $PosNumber)
     {
+
+        //$FileName = $PosNumber;
+        //$PosNumber = $FileName;
+
+
         $mess = 'OK';
+       // return $mess + $PosNumber + $FileName + $MassOfByte;
         return $mess;
 
     }
@@ -26,8 +32,8 @@ class CAddNewsWS extends IWebService
     function GetWebServiceDesc()
     {
         $wsdesc = new CWebServiceDesc();
-        $wsdesc->wsname = "bitrix.webservice.addnews"; // название сервиса
-        $wsdesc->wsclassname = "CAddNewsWS"; // название класса
+        $wsdesc->wsname = "bitrix.webservice.putFile"; // название сервиса
+        $wsdesc->wsclassname = "CPutParamWS"; // название класса
         $wsdesc->wsdlauto = true;
         $wsdesc->wsendpoint = CWebService::GetDefaultEndpoint();
         $wsdesc->wstargetns = CWebService::GetDefaultTargetNS();
@@ -38,7 +44,7 @@ class CAddNewsWS extends IWebService
 
         $wsdesc->classes = array
         (
-            "CChangeElement"=> array
+            "CWebServiceDesc"=> array
             (
                 "putFile" => array
                 (
@@ -69,8 +75,8 @@ class CAddNewsWS extends IWebService
 
 
 
-$arParams["WEBSERVICE_NAME"] = "bitrix.webservice.addnews";
-$arParams["WEBSERVICE_CLASS"] = "CAddNewsWS";
+$arParams["WEBSERVICE_NAME"] = "bitrix.webservice.putFile";
+$arParams["WEBSERVICE_CLASS"] = "CPutParamWS";
 $arParams["WEBSERVICE_MODULE"] = "";
 
 // передаем в компонент описание веб-сервиса
