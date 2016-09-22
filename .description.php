@@ -2,8 +2,8 @@
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 
 $arComponentDescription = array(
-	"NAME" => "РhpSoapWS",
-	"DESCRIPTION" => "РhpSoapWS",
+	"NAME" => "SoapWsphp",
+	"DESCRIPTION" => "SoapWsphp",
 	"ICON" => "/images/icon.gif",
 	"SORT" => 10,
 	"CACHE_PATH" => "Y",
