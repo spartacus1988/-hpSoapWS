@@ -1,24 +1,29 @@
 <?php
 
-//if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
+if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 
 if(!CModule::IncludeModule("webservice") || !CModule::IncludeModule("iblock"))
     return;
 
-// Включаем код для отладки и определяем объект
-    require_once("PHPDebug.php");
-    $debug = new PHPDebug();
 
+require_once('fb.php');
+require_once('FirePHP.class.php');
 
 
 // наш новый класс наследуетсЯ от базового IWebService
 class CPutParamWS extends IWebService
 {
 
-    function putFile($MassOfByte,  $FileName,  $PosNumber)
+    function putFile( $firePHP, $MassOfByte,  $FileName,  $PosNumber)
     {
 
-        $debug->debug("Очень простое сообщение на консоль");
+        //FB::log('Log there');
+        //FB::info('Info message');
+        //FB::warn('Warn message');
+        //FB::error('Error message');
+
+
+        print_r($filename);
 
         //создали/очистили файл и открыли его для записи
         $handler = fopen($filename, "w");
