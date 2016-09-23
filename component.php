@@ -48,9 +48,9 @@ class CPutParamWS extends IWebService
 
 
         $mess = 'OK';
-       // return $mess + $PosNumber + $FileName + $MassOfByte;
-        return $mess;
-
+        //return $mess + $PosNumber + $FileName + $MassOfByte;
+        //return $PosNumber;
+        return array("id"=>$mess);
     }
 
 
@@ -84,6 +84,7 @@ class CPutParamWS extends IWebService
                     ),
                     "output"   => array
                     (
+                        //"id" =>array("varType" => "string", "strict" => "no")
                         "id" =>array("varType" => "string", "strict" => "no")
                     ),
                     "httpauth" => "N"
