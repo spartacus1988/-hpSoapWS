@@ -5,45 +5,46 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 if(!CModule::IncludeModule("webservice") || !CModule::IncludeModule("iblock"))
     return;
 
-
 require_once('fb.php');
 require_once('FirePHP.class.php');
-
 
 // наш новый класс наследуетсЯ от базового IWebService
 class CPutParamWS extends IWebService
 {
-
-    function putFile( $firePHP, $MassOfByte,  $FileName,  $PosNumber)
+    function putFile( $MassOfByte,  $FileName,  $PosNumber)
     {
-
         //FB::log('Log there');
         //FB::info('Info message');
         //FB::warn('Warn message');
         //FB::error('Error message');
 
-
-        print_r($filename);
-
         //создали/очистили файл и открыли его для записи
-        $handler = fopen($filename, "w");
+        //$handler = fopen($filename, "w");
 
-        fwrite($handler, $MassOfByte);
+       // FB::log($handler);
+
+        //fwrite($handler, $MassOfByte);
 
         //чтобы записать данные реально на диск, нужно либо
         //закрыть файл или выполнить ф-цию fflush()
-        fflush($handler);
+        //fflush($handler);
 
         //переместили указатель файла в самое начало
-        fseek($handler, 0);
+        //fseek($handler, 0);
 
         //читаем все данные из файла
-        $text = fread($handler, filesize($filename));
+        //$text = fread($handler, filesize($filename));
+
+        //FB::log($text);
 
         //завершили работу с файлом
-        fclose($handler);
+        //fclose($handler);
 
+        FB::log($MassOfByte);
+        FB::log($FileName);
+        FB::log($PosNumber);
 
+        FB::info($MassOfByte);
 
 
         $mess = 'OK';
@@ -51,7 +52,6 @@ class CPutParamWS extends IWebService
         return $mess;
 
     }
-
 
 
     // метод GetWebServiceDesc возвращает описание сервиса и его методов
@@ -95,11 +95,6 @@ class CPutParamWS extends IWebService
         return $wsdesc;
     }
 }
-
-
-
-
-
 
 $arParams["WEBSERVICE_NAME"] = "bitrix.webservice.putFile";
 $arParams["WEBSERVICE_CLASS"] = "CPutParamWS";
