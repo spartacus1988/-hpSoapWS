@@ -5,8 +5,8 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 if(!CModule::IncludeModule("webservice") || !CModule::IncludeModule("iblock"))
     return;
 
-require_once('fb.php');
-require_once('FirePHP.class.php');
+//require_once('fb.php');
+//require_once('FirePHP.class.php');
 
 // наш новый класс наследуетсЯ от базового IWebService
 class CPutParamWS extends IWebService
@@ -40,16 +40,49 @@ class CPutParamWS extends IWebService
         //завершили работу с файлом
         //fclose($handler);
 
-        FB::log($MassOfByte);
-        FB::log($FileName);
-        FB::log($PosNumber);
+       // FB::log($MassOfByte);
+        //FB::log($FileName);
+        //FB::log($PosNumber);
 
-        FB::info($MassOfByte);
+        //FB::info($MassOfByte);
 
 
         $mess = 'OK';
         //return $mess + $PosNumber + $FileName + $MassOfByte;
         //return $PosNumber;
+
+        //header('Content-Type: image/png');
+
+
+
+        $data = base64_decode($MassOfByte);
+
+        // первый вариант создания изображения
+        //$im = imagecreatefromstring($data);
+        //imageJpeg($im,'name.jpg',100);
+
+        // второй вариант создания изображения
+        chdir('C:\Bitrix\www\bitrix\components\es\SoapWsphp');
+        $file = fopen('image3.jpg', 'w');
+        $rec=fwrite($file,$MassOfByte);
+        fclose($file);
+
+
+        //$file = 'image3.jpg';
+        //file_put_contents($file, $MassOfByte);
+
+       // $file=fopen("$DOCUMENT_ROOT/image3.jpg","w");
+       // $rec=fwrite($file,$data);
+        //fclose($file);
+
+
+
+       // $img= base64_decode($MassOfByte);
+       // $fpng = fopen("img.png", "w");
+       // fwrite($fpng,$img);
+       // fclose($fpng);
+
+
         return array("id"=>$MassOfByte);
     }
 
